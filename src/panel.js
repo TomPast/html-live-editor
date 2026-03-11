@@ -1,3 +1,10 @@
+import {
+  savePanelRect as persistRect,
+  loadPanelRect,
+  savePanelState,
+  loadPanelState,
+} from "./storage.js";
+
 const panel = document.getElementById("editor-panel");
 const toolbar = document.getElementById("editor-toolbar");
 const resizeHandle = document.getElementById("resize-handle");
@@ -28,6 +35,16 @@ function isConstrained() {
     panel.classList.contains("minimized") ||
     panel.classList.contains("maximized")
   );
+}
+
+function getCurrentState() {
+  if (panel.classList.contains("minimized")) return "minimized";
+  if (panel.classList.contains("maximized")) return "maximized";
+  return "normal";
+}
+
+function persistCurrentState() {
+  savePanelState(getCurrentState());
 }
 
 /* Drag */
@@ -71,6 +88,7 @@ toolbar.addEventListener("pointerup", (e) => {
   toolbar.releasePointerCapture(e.pointerId);
   toolbar.classList.remove("dragging");
   document.body.style.userSelect = "";
+  persistRect(savePanelRect());
 });
 
 /* Resize */
@@ -103,6 +121,7 @@ resizeHandle.addEventListener("pointerup", (e) => {
   isResizing = false;
   resizeHandle.releasePointerCapture(e.pointerId);
   document.body.style.userSelect = "";
+  persistRect(savePanelRect());
 });
 
 /* Minimize / Maximize */
@@ -121,6 +140,7 @@ function toggleMinimize() {
     savedRect = savePanelRect();
     panel.classList.add("minimized");
   }
+  persistCurrentState();
 }
 
 function toggleMaximize() {
@@ -135,6 +155,7 @@ function toggleMaximize() {
     savedRectMax = savePanelRect();
     panel.classList.add("maximized");
   }
+  persistCurrentState();
 }
 
 btnClose.addEventListener("click", toggleMinimize);
@@ -167,3 +188,16 @@ function togglePanel() {
 
 codeToggle.classList.add("active");
 codeToggle.addEventListener("click", togglePanel);
+
+/* Restore saved panel state on load */
+const savedPanelRect = loadPanelRect();
+if (savedPanelRect) restorePanelRect(savedPanelRect);
+
+const savedState = loadPanelState();
+if (savedState === "minimized") {
+  savedRect = savePanelRect();
+  panel.classList.add("minimized");
+} else if (savedState === "maximized") {
+  savedRectMax = savePanelRect();
+  panel.classList.add("maximized");
+}

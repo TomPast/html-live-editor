@@ -3,6 +3,7 @@ import { EditorState } from "@codemirror/state";
 import { basicSetup } from "codemirror";
 import { html } from "@codemirror/lang-html";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { saveContent, loadContent, clearAll } from "./storage.js";
 import "./panel.js";
 
 const DEFAULT_HTML = `<!doctype html>
@@ -80,14 +81,20 @@ function updatePreview(content) {
   preview.srcdoc = content;
 }
 
+const initialDoc = loadContent() || DEFAULT_HTML;
+
 const state = EditorState.create({
-  doc: DEFAULT_HTML,
+  doc: initialDoc,
   extensions: [
     basicSetup,
     html(),
     oneDark,
     EditorView.updateListener.of((update) => {
-      if (update.docChanged) updatePreview(update.state.doc.toString());
+      if (update.docChanged) {
+        const doc = update.state.doc.toString();
+        updatePreview(doc);
+        saveContent(doc);
+      }
     }),
     EditorView.theme({
       "&": { height: "100%" },
@@ -96,6 +103,23 @@ const state = EditorState.create({
   ],
 });
 
-new EditorView({ state, parent: editorMount });
+const view = new EditorView({ state, parent: editorMount });
 
-updatePreview(DEFAULT_HTML);
+updatePreview(initialDoc);
+
+/* Reset button */
+document.getElementById("reset-btn").addEventListener("click", () => {
+  if (!confirm("Reset to default? Your current code will be lost.")) return;
+  clearAll();
+  view.dispatch({
+    changes: { from: 0, to: view.state.doc.length, insert: DEFAULT_HTML },
+  });
+  updatePreview(DEFAULT_HTML);
+  /* Reset panel to default position/state */
+  const panel = document.getElementById("editor-panel");
+  panel.classList.remove("minimized", "maximized", "hidden");
+  panel.style.top = "";
+  panel.style.left = "";
+  panel.style.width = "";
+  panel.style.height = "";
+});

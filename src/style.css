@@ -44,10 +44,10 @@ html, body { height: 100%; overflow: hidden; }
   pointer-events: none;
 }
 
-/* Code toggle button */
-#code-toggle {
+/* Top-right action buttons */
+#code-toggle,
+#reset-btn {
   position: fixed;
-  top: 1rem;
   right: 1rem;
   z-index: 2;
   padding: 4px 10px;
@@ -59,8 +59,11 @@ html, body { height: 100%; overflow: hidden; }
   cursor: pointer;
   transition: color 0.2s, background 0.2s;
 }
+#code-toggle { top: 1rem; }
+#reset-btn   { top: calc(1rem + 32px); }
 #code-toggle:hover,
-#code-toggle.active {
+#code-toggle.active,
+#reset-btn:hover {
   color: rgba(255, 255, 255, 0.85);
   background: rgba(12, 12, 20, 0.6);
 }
@@ -113,6 +116,21 @@ html, body { height: 100%; overflow: hidden; }
   user-select: none;
   pointer-events: none;
 }
+
+/* Save status indicator */
+#save-status {
+  margin-left: auto;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: rgba(40, 200, 64, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+}
+#save-status.visible { opacity: 1; }
+
 
 /* Resize handle — bottom-right corner */
 #resize-handle {

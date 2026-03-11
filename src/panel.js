@@ -32,7 +32,7 @@ let isDragging = false;
 let dragStartX, dragStartY, panelStartX, panelStartY, dragPanelW, dragPanelH;
 
 toolbar.addEventListener("pointerdown", (e) => {
-  if (e.target.closest(".tl-btn") || isConstrained()) return;
+  if (e.target.closest("button") || isConstrained()) return;
   isDragging = true;
   toolbar.setPointerCapture(e.pointerId);
   toolbar.classList.add("dragging");

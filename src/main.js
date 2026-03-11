@@ -4,6 +4,7 @@ import { basicSetup } from "codemirror";
 import { html } from "@codemirror/lang-html";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { saveContent, loadContent, clearAll } from "./storage.js";
+import { initExport } from "./export.js";
 import "./panel.js";
 
 const DEFAULT_HTML = `<!doctype html>
@@ -106,6 +107,8 @@ const state = EditorState.create({
 const view = new EditorView({ state, parent: editorMount });
 
 updatePreview(initialDoc);
+
+initExport(() => view.state.doc.toString());
 
 /* Reset button */
 document.getElementById("reset-btn").addEventListener("click", () => {

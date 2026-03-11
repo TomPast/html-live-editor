@@ -46,7 +46,8 @@ html, body { height: 100%; overflow: hidden; }
 
 /* Top-right action buttons */
 #code-toggle,
-#reset-btn {
+#reset-btn,
+#export-btn {
   position: fixed;
   right: 1rem;
   z-index: 2;
@@ -61,9 +62,11 @@ html, body { height: 100%; overflow: hidden; }
 }
 #code-toggle { top: 1rem; }
 #reset-btn   { top: calc(1rem + 32px); }
+#export-btn  { top: calc(1rem + 64px); }
 #code-toggle:hover,
 #code-toggle.active,
-#reset-btn:hover {
+#reset-btn:hover,
+#export-btn:hover {
   color: rgba(255, 255, 255, 0.85);
   background: rgba(12, 12, 20, 0.6);
 }

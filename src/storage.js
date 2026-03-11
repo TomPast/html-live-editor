@@ -17,9 +17,10 @@ function debounce(fn, ms) {
 
 /* Save indicator */
 let fadeTimer;
-function flashSaveStatus() {
+export function flashStatus(text = "✓ Saved") {
   const el = document.getElementById("save-status");
   if (!el) return;
+  el.textContent = text;
   el.classList.add("visible");
   clearTimeout(fadeTimer);
   fadeTimer = setTimeout(() => el.classList.remove("visible"), 1500);
@@ -29,7 +30,7 @@ function flashSaveStatus() {
 const _saveContentNow = (htmlString) => {
   try {
     localStorage.setItem(KEYS.content, htmlString);
-    flashSaveStatus();
+    flashStatus();
   } catch { /* quota exceeded — silently fail */ }
 };
 

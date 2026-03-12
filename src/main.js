@@ -5,6 +5,7 @@ import { html } from "@codemirror/lang-html";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { saveContent, loadContent, clearAll } from "./storage.js";
 import { initExport } from "./export.js";
+import { initShare, getSharedContent } from "./share.js";
 import "./panel.js";
 
 const DEFAULT_HTML = `<!doctype html>
@@ -82,7 +83,7 @@ function updatePreview(content) {
   preview.srcdoc = content;
 }
 
-const initialDoc = loadContent() || DEFAULT_HTML;
+const initialDoc = getSharedContent() || loadContent() || DEFAULT_HTML;
 
 const state = EditorState.create({
   doc: initialDoc,
@@ -109,6 +110,7 @@ const view = new EditorView({ state, parent: editorMount });
 updatePreview(initialDoc);
 
 initExport(() => view.state.doc.toString());
+initShare(() => view.state.doc.toString());
 
 /* Reset button */
 document.getElementById("reset-btn").addEventListener("click", () => {

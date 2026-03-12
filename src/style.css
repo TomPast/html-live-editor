@@ -47,7 +47,8 @@ html, body { height: 100%; overflow: hidden; }
 /* Top-right action buttons */
 #code-toggle,
 #reset-btn,
-#export-btn {
+#export-btn,
+#share-btn {
   position: fixed;
   right: 1rem;
   z-index: 2;
@@ -63,10 +64,12 @@ html, body { height: 100%; overflow: hidden; }
 #code-toggle { top: 1rem; }
 #reset-btn   { top: calc(1rem + 32px); }
 #export-btn  { top: calc(1rem + 64px); }
+#share-btn   { top: calc(1rem + 96px); }
 #code-toggle:hover,
 #code-toggle.active,
 #reset-btn:hover,
-#export-btn:hover {
+#export-btn:hover,
+#share-btn:hover {
   color: rgba(255, 255, 255, 0.85);
   background: rgba(12, 12, 20, 0.6);
 }
@@ -216,4 +219,79 @@ html, body { height: 100%; overflow: hidden; }
 #editor-mount .cm-scroller {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+/* Share modal */
+#share-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.share-modal-card {
+  width: min(480px, 90vw);
+  background: rgba(12, 12, 20, 0.92);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.share-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 600 0.8rem 'Segoe UI', system-ui, sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.share-modal-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+.share-modal-close:hover { color: rgba(255, 255, 255, 0.85); }
+
+.share-modal-input {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  font: 400 0.75rem 'Consolas', 'Courier New', monospace;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  outline: none;
+}
+.share-modal-input:focus {
+  border-color: rgba(100, 150, 255, 0.4);
+}
+
+.share-modal-copy {
+  align-self: flex-end;
+  padding: 0.4rem 1rem;
+  font: 600 0.7rem 'Segoe UI', system-ui, sans-serif;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(100, 150, 255, 0.2);
+  border: 1px solid rgba(100, 150, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.share-modal-copy:hover {
+  background: rgba(100, 150, 255, 0.35);
 }

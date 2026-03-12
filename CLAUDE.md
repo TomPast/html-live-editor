@@ -36,5 +36,4 @@
 - Console output panel (capture console.log/warn/error from preview iframe)
 - Template library (starter templates: blank, flexbox layout, animation, form, etc.)
 - Multi-file tabs (separate HTML/CSS/JS editors combined into preview)
-- Code sharing (URL encoding or external service)
 - Real-time multiplayer editing via WebSocket

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@v0.183.2/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.183.2/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        innerWidth / innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(2, 2, 3);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(innerWidth, innerHeight);
+      renderer.setPixelRatio(devicePixelRatio);
+      document.body.appendChild(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+
+      /* Lights */
+      scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+      const dir = new THREE.DirectionalLight(0xffffff, 1);
+      dir.position.set(3, 4, 2);
+      scene.add(dir);
+
+      /* Cube */
+      const geo = new THREE.BoxGeometry();
+      const mat = new THREE.MeshStandardMaterial({ color: 0x6a9955 });
+      const cube = new THREE.Mesh(geo, mat);
+      cube.position.set(0, 0.5, 0);
+      scene.add(cube);
+
+      /* Grid */
+      scene.add(new THREE.GridHelper(10, 20, 0x333333, 0x222222));
+
+      /* Loop */
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.y += 0.01;
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = innerWidth / innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(innerWidth, innerHeight);
+      });
+    </script>
+  </body>
+</html>

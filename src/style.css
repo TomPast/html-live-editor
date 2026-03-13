@@ -54,6 +54,7 @@ body {
   flex-shrink: 0;
   user-select: none;
   -webkit-user-select: none;
+  position: relative;
 }
 
 .toolbar-title {
@@ -96,6 +97,42 @@ body {
 
 #topbar button:hover {
   color: var(--text);
+}
+
+/* Template dropdown */
+.templates-dropdown {
+  position: absolute;
+  top: 100%;
+  z-index: 20;
+  min-width: 160px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.templates-dropdown button {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  padding: 6px 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.templates-dropdown button:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Save status */
@@ -714,6 +751,12 @@ body {
     flex: 1;
     flex-shrink: 1;
     border-top: none;
+  }
+
+  .templates-dropdown {
+    left: 4px;
+    right: 4px;
+    min-width: auto;
   }
 
   /* Topbar adjustments */

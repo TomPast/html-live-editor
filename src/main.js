@@ -9,6 +9,7 @@ import { initShare, getSharedContent } from "./share.js";
 import { resetLayout } from "./panel.js";
 import { injectConsole, clearOnRefresh, initConsole } from "./console.js";
 import { DEFAULT_HTML, getTemplateContent, initTemplates } from "./templates.js";
+import { initInfo } from "./info.js";
 
 const preview = document.getElementById("preview");
 const editorMount = document.getElementById("editor-mount");
@@ -47,6 +48,7 @@ updatePreview(initialDoc);
 initExport(() => view.state.doc.toString());
 initShare(() => view.state.doc.toString());
 initConsole(() => updatePreview(view.state.doc.toString()));
+initInfo();
 initTemplates((newContent) => {
   view.dispatch({
     changes: { from: 0, to: view.state.doc.length, insert: newContent },

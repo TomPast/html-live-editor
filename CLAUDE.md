@@ -33,6 +33,4 @@
 
 ## Planned Features
 
-- Template library (starter templates: blank, flexbox layout, animation, form, etc.)
-- Multi-file tabs (separate HTML/CSS/JS editors combined into preview)
 - Real-time multiplayer editing via WebSocket

@@ -3,11 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HTML Live Editor</title>
+    <title>Editor</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
@@ -18,17 +21,25 @@
             <span class="toolbar-title"><span class="dot"></span>editor</span>
             <span id="save-status">saved</span>
             <div class="toolbar-spacer"></div>
-            <button id="templates-btn" title="Load a template">templates</button>
+            <button id="templates-btn" title="Load a template">
+              templates
+            </button>
             <button id="reset-btn" title="Reset to default">reset</button>
-            <button id="export-btn" title="Download as HTML (Ctrl+S)">export</button>
+            <button id="export-btn" title="Download as HTML (Ctrl+S)">
+              export
+            </button>
             <button id="share-btn" title="Share code">share</button>
             <button id="info-btn" title="About this project">about</button>
-            <button id="code-toggle" title="Collapse editor (Ctrl+E)"><span>collapse</span></button>
+            <button id="code-toggle" title="Collapse editor (Ctrl+E)">
+              <span>collapse</span>
+            </button>
           </header>
           <div id="editor-mount"></div>
           <div id="console-panel" class="collapsed">
             <header id="console-bar">
-              <span class="console-title"><span class="console-dot"></span>console</span>
+              <span class="console-title"
+                ><span class="console-dot"></span>console</span
+              >
               <span id="console-badge"></span>
               <div class="toolbar-spacer"></div>
               <button id="console-clear" title="Clear console">clear</button>
@@ -37,7 +48,13 @@
             <div id="console-output"></div>
             <div id="console-input-row">
               <span class="console-input-chevron">›</span>
-              <input id="console-input" type="text" placeholder="evaluate expression…" autocomplete="off" spellcheck="false" />
+              <input
+                id="console-input"
+                type="text"
+                placeholder="evaluate expression…"
+                autocomplete="off"
+                spellcheck="false"
+              />
             </div>
           </div>
         </div>
@@ -46,11 +63,19 @@
           <iframe id="preview" sandbox="allow-scripts"></iframe>
         </div>
       </main>
-      <button id="expand-btn" title="Show editor (Ctrl+E)"><span class="dot"></span><span>editor</span></button>
+      <button id="expand-btn" title="Show editor (Ctrl+E)">
+        <span class="dot"></span><span>editor</span>
+      </button>
       <nav id="mobile-tabs">
-        <button class="mobile-tab active" data-tab="editor"><span class="mobile-tab-icon">&lt;/&gt;</span> code</button>
-        <button class="mobile-tab" data-tab="preview"><span class="mobile-tab-icon">&#9655;</span> preview</button>
-        <button class="mobile-tab" data-tab="console"><span class="mobile-tab-icon">&#9641;</span> console</button>
+        <button class="mobile-tab active" data-tab="editor">
+          <span class="mobile-tab-icon">&lt;/&gt;</span> code
+        </button>
+        <button class="mobile-tab" data-tab="preview">
+          <span class="mobile-tab-icon">&#9655;</span> preview
+        </button>
+        <button class="mobile-tab" data-tab="console">
+          <span class="mobile-tab-icon">&#9641;</span> console
+        </button>
       </nav>
     </div>
     <script type="module" src="/src/main.js"></script>
